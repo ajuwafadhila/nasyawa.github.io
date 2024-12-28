@@ -1,0 +1,215 @@
+---
+title: "Pengaruh External Debt Stock terhadap GDP Tahun 2023"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Nasywa Fadhila "
+date: 2024-12-28
+number-sections: true
+format:
+   html:
+    css: styles.css
+editor: visual
+---
+
+![logo](poltekapp.jpg)
+
+<style>
+p {text-align: justify;}
+</style>
+
+## Pendahuluan
+
+### Latar belakang
+
+Utang luar negeri (external debt) merupakan salah satu instrumen pembiayaan yang sering digunakan oleh negara untuk mendukung pembangunan ekonomi. Meskipun utang dapat memberikan manfaat dalam hal peningkatan investasi dan pertumbuhan ekonomi, terdapat kekhawatiran bahwa utang yang tinggi dapat berdampak negatif terhadap ekonomi suatu negara, termasuk Produk Domestik Bruto (GDP).
+
+Dalam konteks negara berkembang, utang luar negeri sering kali digunakan untuk membiayai proyek-proyek infrastruktur, pendidikan, dan kesehatan yang bertujuan untuk meningkatkan kapasitas produksi dan kualitas hidup masyarakat. Namun, jika utang tidak dikelola dengan baik, hal ini dapat mengakibatkan beban kewajiban yang berat, yang pada gilirannya dapat menghambat pertumbuhan ekonomi dan mengurangi kemampuan negara untuk berinvestasi dalam pembangunan jangka panjang.
+
+Penelitian sebelumnya menunjukkan bahwa terdapat hubungan yang kompleks antara utang luar negeri dan pertumbuhan ekonomi. Di satu sisi, utang dapat merangsang pertumbuhan dengan menyediakan modal yang diperlukan untuk investasi. Di sisi lain, utang yang berlebihan dapat menghasilkan biaya bunga yang tinggi dan mengalihkan sumber daya dari pengeluaran produktif ke pembayaran utang, yang dapat menghambat pertumbuhan GDP.
+
+Faktor-faktor lain, seperti kebijakan moneter, stabilitas politik, dan kondisi ekonomi global, juga dapat memengaruhi hubungan antara utang luar negeri dan GDP. Oleh karena itu, penting untuk mengeksplorasi bagaimana stok utang luar negeri dapat memengaruhi pertumbuhan ekonomi suatu negara, terutama dalam konteks negara berkembang yang sering kali bergantung pada utang luar negeri untuk mendanai pembangunan.
+
+Melalui penelitian ini, diharapkan dapat memberikan pemahaman yang lebih mendalam mengenai dampak stok utang luar negeri terhadap pertumbuhan GDP, serta memberikan rekomendasi bagi pembuat kebijakan dalam merumuskan strategi pengelolaan utang yang berkelanjutan. Penelitian ini juga diharapkan dapat berkontribusi pada literatur yang ada mengenai ekonomi makro dan pengelolaan utang di negara berkembang.
+
+
+### Ruang lingkup
+
+Penelitian ini menggunakan data yang diperoleh melalui package WDI yang diakses menggunakan perangkat lunak R. Data yang digunakan mencakup dua variabel utama, yaitu External Debt Stock (utang luar negeri) sebagai variabel X dan GDP (Produk Domestik Bruto) sebagai variabel Y. Data tersebut mencakup negara-negara yang terdaftar di World Bank dan merepresentasikan kondisi pada tahun 2023.
+
+### Rumusan masalah
+
+Penelitian ini akan menjawab persoalan mengenai:
+
+1.	Seberapa besar pengaruh external debt stock terhadap GDP?
+2.	Apa saja faktor yang ditimbulkan dari external debt stock terhadap GDP?
+3.	Apa tantangan yang dihadapi Indonesia external debt stock?
+
+
+### Tujuan dan manfaat penelitian
+
+Tujuan penelitian ini dirumuskan untuk memberikan manfaat bagi pemerintah dan masyarakat, dengan fokus pada pengaruh external debt stock terhadap GDP indonesia :
+
+*1.* *Bagi Pemerintah*
+
+Memberikan rekomendasi kebijakan yang berbasis data untuk meningkatkan kewaspadaan pemerintah akan external debt stock yang mempengaruhi GDP indonesia. Mengidentifikasi strategi yang dapat digunakan pemerintah untuk mengoptimalkan pemanfaatan external debt stock, sehingga dapat mendukung pertumbuhan ekonomi yang berkelanjutan.
+
+*2.* *Bagi Masyarakat*
+
+Meningkatkan kesadaran publik mengenai peran external debt stock terhadap GDP indonesia dan dampaknya terhadap kesejahteraan masyarakat. Mendorong partisipasi masyarakat dalam proses pengambilan keputusan terkait external debt stock, dengan memahami implikasi dari kebijakan tersebut terhadap kehidupan sehari-hari mereka.
+
+
+### Package
+
+Packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library(tidyverse)
+library(readxl)
+library(WDI)
+library(knitr)
+library(ggplot2)
+library(dplyr)
+```
+
+## Studi pustaka
+
+*1.* *tang Luar Negeri*
+
+Utang luar negeri adalah kewajiban keuangan yang dimiliki suatu negara kepada kreditor asing. Menurut Krugman dan Obstfeld (2018), utang luar negeri dapat berfungsi sebagai sumber pembiayaan yang penting untuk mendukung pertumbuhan ekonomi, terutama di negara-negara berkembang yang membutuhkan investasi dalam infrastruktur dan layanan publik.
+
+*2.* *Hubungan antara Utang dan Pertumbuhan Ekonomi*
+
+Penelitian oleh Eichengreen dan Hausmann (2005) menunjukkan bahwa utang luar negeri dapat memiliki dampak positif terhadap pertumbuhan ekonomi jika digunakan untuk investasi produktif. Namun, utang yang tinggi juga dapat menimbulkan risiko default dan mempengaruhi stabilitas ekonomi. 
+
+*3.* *Dampak Utang terhadap GDP*
+
+Beberapa studi empiris menunjukkan bahwa terdapat hubungan non-linear antara utang luar negeri dan pertumbuhan GDP. Misalnya, penelitian oleh Cecchetti et al. (2011) menemukan bahwa setelah suatu ambang batas tertentu, peningkatan utang dapat menghambat pertumbuhan ekonomi, terutama di negara-negara dengan struktur ekonomi yang lemah.
+
+*4.* *Faktor Pengaruh Lainnya*
+
+Selain jumlah utang, faktor-faktor seperti kebijakan moneter, stabilitas politik, dan kondisi ekonomi global juga berperan penting dalam menentukan dampak utang luar negeri terhadap GDP. Menurut Aizenman dan Jinjarak (2013), negara-negara dengan kebijakan fiskal yang sehat dan stabilitas politik cenderung dapat mengelola utang dengan lebih baik, sehingga meminimalkan dampak negatif terhadap pertumbuhan ekonomi.
+
+*5.* *Studi Kasus Negara Berkembang*
+
+Studi oleh Ocampo dan Rada (2015) menunjukkan bahwa banyak negara berkembang mengalami kesulitan dalam mengelola utang luar negeri mereka, yang sering kali mengakibatkan pertumbuhan ekonomi yang lambat. Penelitian ini menekankan perlunya strategi pengelolaan utang yang lebih efektif untuk mendorong pertumbuhan GDP.
+
+*6.* *Kebijakan Pengelolaan Utang*
+
+Kebijakan pengelolaan utang yang baik dapat meningkatkan kemampuan suatu negara untuk memanfaatkan utang luar negeri secara produktif. Menurut Reinhart dan Rogoff (2010), negara yang memiliki kebijakan yang transparan dan akuntabel dalam pengelolaan utang cenderung lebih mampu memanfaatkan utang untuk pertumbuhan ekonomi.
+
+
+## Metode penelitian
+
+### Data
+
+penelitian ini menggunakan data tahun 2023 yang diperoleh dari Worldbank, sehingga didapatkan data sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library(WDI)
+nasywa <- WDI(country = "all", 
+            indicator = c("DT.DOD.DECT.CD", "NY.GDP.MKTP.CD"), 
+            start = 2023, 
+            end = 2023)
+colnames(nasywa)[colnames(nasywa) %in% c("DT.DOD.DECT.CD", "NY.GDP.MKTP.CD")] <- c("X", "Y")
+library(dplyr)
+nasywa<- nasywa%>%
+  select(-iso2c, -iso3c, -year)
+library(knitr)
+kable(nasywa)
+library(writexl)
+write_xlsx(nasywa,"nasywa.xlsx")
+View(nasywa)
+```
+
+```{r}
+#| warning: false
+#| echo: true
+library("ggplot2")
+library("readxl")
+library("dplyr")
+ggplot(data=nasywa,aes(x=X,y=Y))+
+  geom_point(color="violet",size=2)+
+  labs(title="Hubungan External Debt Stock terhadap GDP Tahun 2023",
+       x="External Debt Stock",
+       y="GDP",
+       caption = "sumber: data.worldbank.org")+
+  theme_classic()
+```
+
+
+### Metode analisis
+
+Penelitian ini menggunakan metode regresi univariat atau Ordinary Least Square (OLS) dengan satu variabel independen. Tujuan penelitian ini adalah untuk menganalisis hubungan antara utang luar negeri suatu negara dengan Produk Domestik Bruto (GDP). Model yang digunakan dirancang secara spesifik untuk menggambarkan keterkaitan antara kedua variabel, sebagai berikut:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah GDP dan $x_t$ adalah External Debt Stock.
+
+## Pembahasan
+
+### Pembahasan masalah
+
+Regresi yang telah dilakukan, menghasilkan data sebgai berikut:
+
+| variable           | Coefficients |
+|--------------------|--------------|
+| Intercept          | -8.355e+10   |
+| X                  | 4.454e+00    |
+| p-value            | < 2.2e-16    |
+| Multiple R-squared | 0.9702       |
+| Adjusted R-squared | 0.97         |
+
+Sehingga dapat di implementasikan sebagai berikut: 
+$$
+y_{t}=\ (-8.355e+10) + \ (4.454e+00)+\mu_t
+$$
+
+Koefisien intercept (β0) sebesar -8.355e+10 menunjukkan bahwa jika utang luar negeri(X) bernilai nol, GDP (Y) diprediksi sebesar −83.55 miliar. Namun, dalam konteks ekonomi, nilai ini hampir tidak mungkin suatu negara memiliki utang luar negeri nol. Koefisien X(β1) sebesar 4.454e+00 menunjukkan bahwa setiap peningkatan satu satuan pada utang luar negeri diasosiasikan dengan peningkatan GDP sebesar 4.454 unit. Koefisien ini signifikan secara statistik, dengan p-value < 2e-16, yang menunjukkan hubungan kuat antara utang luar negeri dan GDP.
+
+Hubungan positif tidak selalu berarti bahwa utang secara langsung meningkatkan GDP. Kemungkinan besar, negara-negara dengan GDP besar juga memiliki kapasitas untuk mengambil utang lebih banyak karena mereka dianggap lebih mampu membayar kembali utang tersebut.
+
+Koefisien positif bisa terjadi jika sebagian besar negara dalam data penelitian menggunakan utang mereka untuk kegiatan produktif seperti pembangunan infrastruktur atau peningkatan kapasitas industri. Hal ini membantu meningkatkan output ekonomi yang direfleksikan dalam GDP.
+
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+library(readxl)
+nasywa<-read_excel("nasywa.xlsx")
+reg<-lm(Y~X,data=nasywa)
+summary(reg)
+```
+
+Median residual yang positif (5.576e+10) menunjukkan bahwa sebagian besar data lebih cenderung memberikan prediksi lebih besar dari nilai observasi. Model ini memiliki kecocokan yang sangat baik dengan data, dengan Multiple R-squared sebesar 0.9702, yang berarti sekitar 97.02% variasi dalam Y dapat dijelaskan oleh X. Nilai Adjusted R-squared yang sedikit lebih rendah (0.97) juga mendukung kecocokan model setelah mempertimbangkan jumlah prediktor yang digunakan.
+
+Statistik F sebesar 4039 dengan nilai p < 2.2e-16 mengindikasikan bahwa model secara keseluruhan signifikan, yang berarti bahwa variabel X memiliki pengaruh yang sangat kuat terhadap Y. Meskipun model ini menunjukkan kecocokan yang sangat baik dan kemampuan prediksi yang tinggi, masalah residual yang sangat besar perlu diperhatikan, karena dapat menunjukkan adanya outliers atau adanya variabel lain yang belum dimasukkan dalam model. Secara keseluruhan, model ini dapat diandalkan dalam menjelaskan hubungan antara X dan Y, namun analisis lebih lanjut diperlukan untuk menangani masalah residual yang besar.
+
+## Kesimpulan
+
+Kesimpulan dari penelitian ini menunjukkan bahwa utang luar negeri memiliki pengaruh signifikan terhadap Produk Domestik Bruto (GDP) di negara berkembang, khususnya Indonesia. Berdasarkan analisis regresi yang dilakukan, ditemukan bahwa setiap peningkatan satu unit pada stok utang luar negeri berhubungan dengan peningkatan GDP sebesar 4.454 unit. Koefisien regresi yang signifikan dengan nilai p-value yang sangat kecil menunjukkan adanya hubungan yang kuat antara kedua variabel tersebut. Model yang digunakan dalam penelitian ini juga menunjukkan kecocokan yang sangat baik dengan data, dengan nilai R-squared sebesar 0.9702, yang berarti bahwa 97.02% variasi dalam GDP dapat dijelaskan oleh stok utang luar negeri.
+
+Namun, meskipun terdapat hubungan positif antara utang luar negeri dan GDP, perlu dicatat bahwa utang yang tinggi bisa berisiko jika tidak dikelola dengan baik. Sumber daya yang digunakan untuk membayar utang bisa mengalihkan perhatian dari pengeluaran produktif, sehingga mempengaruhi pertumbuhan ekonomi dalam jangka panjang. 
+
+## Referensi
+
+https://id.tradingeconomics.com Trade Economic
+
+https://www.bps.go.id/id  BPS 
+
+https://www.worldbank.org/ext/en/home  World Bank
+
+Aizenman, J., & Jinjarak, Y. (2013). The Financial Crisis and Its Aftermath: What’s the New Normal? Journal of International Money and Finance. 
+
+Cecchetti, S. G., Mohanty, M. S., & Zampolli, F. (2011). The Real Effects of Debt. BIS Working Papers. 
+
+Eichengreen, B., & Hausmann, R. (2005). Other People’s Money: Debt Denomination and Financial Instability in Emerging Market Economies. University of Chicago Press.
+
+Krugman, P., & Obstfeld, M. (2018). International Economics: Theory and Policy. Pearson. 
+Ocampo, J. A., & Rada, C. (2015). The Economics of the Global Financial Crisis. Cambridge University Press. 
+
+Reinhart, C. M., & Rogoff, K. S. (2010). This Time Is Different: Eight Centuries of Financial Folly. Princeton University Press.
